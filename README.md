@@ -5,7 +5,7 @@ This project is used to gain insight and understaniding into my approach to soft
 
 Installation
 
-Clone the repository by 
+Clone the repository by https://github.com/OmphiMph/InvestecAssessment.git
 
 Usage
 
