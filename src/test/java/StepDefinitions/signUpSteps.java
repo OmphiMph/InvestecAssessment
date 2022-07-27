@@ -14,17 +14,23 @@ import static java.lang.Thread.sleep;
 public class signUpSteps {
 
     public static WebDriver driver;
-    @Given("user navigates to the Investec website")
-    public void user_navigates_to_the_Investec_website() throws InterruptedException{
-        //Launch Browser
-        System.out.println("Launch Browser and navigate to the Investec website");
-
+    
+    @Before
+    public void setUp(){
+        //Set properties
         String projectPath = System.getProperty("user.dir");
         System.out.println("Project path is :"+projectPath);
         System.setProperty("webdriver.chrome.driver", projectPath + "/src/test/resources/drivers/chromedriver.exe");
-
+    }
+    
+    @Given("user navigates to the Investec website")
+    public void user_navigates_to_the_Investec_website() throws InterruptedException{
+        //Launch Browser
         driver = new ChromeDriver();
+        
+        //Maximise window and close driver in 10 seconds if there's an issue
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 
         //Navigate to the InvestTec Website
@@ -156,5 +162,10 @@ public class signUpSteps {
         boolean thankYouPage = driver.findElement(By.xpath("//h3[@class = 'thank-you__heading']")).isDisplayed();
         Assert.assertEquals("Something went wrong!",thankYouPage, true);
 
+    }
+    
+    public static void tearDown(){
+        //Method to close browser
+        driver.quit();
     }
 }
